@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/joho/godotenv"
@@ -14,17 +15,27 @@ import (
 func PostAccount(address, email, name string) error {
 	godotenv.Load("../../../../.env")
 
+	preapproved := strings.Split(os.Getenv("PRE_APPROVED_ADMINS"), ",")
+
+	auth_level := "none"
+	for _, a := range preapproved {
+		if a == email {
+			auth_level = "admin"
+		}
+	}
+
 	body := bytes.NewReader([]byte(fmt.Sprintf(`{
 		"records": [
 			{
 				"fields": {
 					"address": "%s",
 					"email": "%s",
-					"name": "%s"
+					"name": "%s",
+					"auth_level": "%s"
 				}
 			}
 		]
-	}`, address, email, name)))
+	}`, address, email, name, auth_level)))
 
 	url := fmt.Sprintf("https://api.airtable.com/v0/%s/%s",
 		os.Getenv("AIRTABLE_BASE_ID"), os.Getenv("AIRTABLE_AUTH_TABLE_ID"))

@@ -50,7 +50,7 @@ const adapter = new AuthAdapter({
         typeOfLogin: "email_passwordless",
         clientId
       }
-    }
+    },
   }
 })
 

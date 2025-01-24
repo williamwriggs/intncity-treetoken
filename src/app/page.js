@@ -76,7 +76,7 @@ const AuthButton = () => {
   return (
     <>
       {!connected ? (
-        <div style={{display: "grid", gridTemplateRows: "1fr 1fr", gap: "10px"}}>
+        <div style={{display: "grid", gridTemplateRows: "1fr 1fr"}}>
           <Button
             color="secondary"
             type="button"
@@ -84,6 +84,8 @@ const AuthButton = () => {
             variant="contained"
             sx={{
               borderRadius: "5px",
+              borderBottomLeftRadius: "0px",
+              borderBottomRightRadius: "0px"
             }}
             onClick={() => {
               auth.Login("google")
@@ -98,9 +100,16 @@ const AuthButton = () => {
             variant="contained"
             sx={{
               borderRadius: "5px",
+              borderTopLeftRadius: "0px",
+              borderTopRightRadius: "0px",
+              backgroundColor: "white",
+              color: "#33691e",
+              "&:hover": {
+                background: "whitesmoke"
+              }
             }}
             onClick={() => {
-              auth.Login("emailpasswordless", "peej@oleary.com")
+              navigate("/login")
             }}
           >
             Sign In with Email
@@ -114,7 +123,7 @@ const AuthButton = () => {
           size="large"
           variant="contained"
           sx={{
-            borderRadius: "0 0 0 5px",
+            borderRadius: "0 0 0 5px"
           }}
           onClick={() => {
             navigate("/profile");

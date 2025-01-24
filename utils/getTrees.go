@@ -46,7 +46,6 @@ func GetTrees() (*sheets.ValueRange, error) {
 
 	sheetsService, err := sheets.NewService(ctx, option.WithCredentialsJSON([]byte(credentials)), option.WithScopes(sheets.SpreadsheetsReadonlyScope))
 	if err != nil {
-		fmt.Println(err)
 		err = fmt.Errorf("error creating sheets service: %s", err)
 		return nil, err
 	}

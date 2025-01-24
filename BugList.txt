@@ -58,4 +58,3 @@ Post Production Changes:
  - Add Auth0 email code sign on
  - Pull trees from combined sources
  - add check box to change filter on admin trees view to all trees (not just unverified)
- - CSV Download (not technically necessary until after trees are planted) + add ability to sort by planter(s) and time period

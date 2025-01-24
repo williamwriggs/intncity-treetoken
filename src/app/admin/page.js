@@ -167,7 +167,7 @@ export default function Profile() {
                     type="button" 
                     variant="contained"
                     onClick={() => {
-                        navigate("/")
+                        navigate("/profile")
                     }}
                     sx={{
                         borderRadius: "0 0 5px 0"

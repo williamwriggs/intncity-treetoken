@@ -60,6 +60,7 @@ export default function TreeListDisplay({
                 approved: approvedOverride
             })
             if(reset) {
+                console.log(t.records)
                 setTrees([t.records])
                 setOffsets([t.offset])
                 setPage(0)

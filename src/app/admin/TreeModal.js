@@ -2,14 +2,23 @@ import { useAuth } from "@/auth/Hooks"
 import GenericModal from "./GenericModal"
 import { Button, CircularProgress, Grid, Typography } from "@mui/material"
 import sign from "@/auth/sign"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import signedFetch from "@/auth/signedFetch"
 
 export default function TreeModal({ open, handleClose, tree, approveFunction }) {
     const auth = useAuth()
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
-    const [approved, setApproved] = useState(false)
+    const [approved, setApproved] = useState(tree?.fields["Approver Signature"] ? true : false)
+
+    useEffect(() => {
+        console.log(approved)
+    }, [approved])
+
+
+    useEffect(() => {
+        setApproved(tree?.fields["Approver Signature"] ? true : false)
+    }, [tree])
 
     const handleApproveTree = async () => {
         setLoading(true)
@@ -45,7 +54,7 @@ export default function TreeModal({ open, handleClose, tree, approveFunction }) 
 
     return (
         <GenericModal open={open} handleClose={handleClose}>
-            <Typography variant="h4" sx={{fontWeight: "bold", textAlign: "center", margin: "10px"}}>{tree?.fields["Tree Name"]}</Typography>
+            <Typography variant="h4" sx={{fontWeight: "bold", textAlign: "center", margin: "10px", textTransform: "capitalize"}}>{tree?.fields["Tree Name"]}</Typography>
             <Typography variant="h6" sx={{textAlign: "center", margin: "10px", marginBottom: "20px"}}>{tree?.fields["Tree Category"]}</Typography>
             <Grid container direction="row" sx={{ flexGrow: 1 }} columnSpacing={{md: 2, lg: 2}}>
                 <Grid item sm={12} md={6} lg={6} sx={{overflow: "hidden", maxWidth: "100%", maxHeight: "45vh", gap: "20px"}}>

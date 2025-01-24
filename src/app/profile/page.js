@@ -37,18 +37,18 @@ export default function Profile() {
       
         return (
             <Button
-            color="secondary"
-            type="button"
-            size="large"
-            variant="contained"
-            sx={{
-                borderRadius: "5px",
-            }}
-            onClick={() => {
-                if(auth.app) {
-                navigate("/admin");
-                }
-            }}
+                color="secondary"
+                type="button"
+                size="large"
+                variant="contained"
+                sx={{
+                    borderRadius: "5px",
+                }}
+                onClick={() => {
+                    if(auth.app) {
+                        navigate("/admin");
+                    }
+                }}
             >
             Admin Panel
         </Button>
@@ -186,7 +186,7 @@ export default function Profile() {
                     }}
                 >   
                     <Box maxWidth="sm" sx={{borderRadius: "50%", padding: "7px", paddingBottom: "2px", position: "relative", bottom: "7.5vh", backgroundColor: "white", boxShadow: "5px 5px 10px gray"}}>
-                        {userInfo ? <img src={userInfo?.profileImage} style={{ position: "relative", borderRadius: "50%"}}/> : <div style={{height: "96px", width: "96px"}}/>}
+                        {userInfo ? <img src={userInfo?.profileImage} style={{ position: "relative", borderRadius: "50%", height: "96px", width: "96px" }}/> : <div style={{height: "96px", width: "96px"}}/>}
                     </Box>
                     <Grid sx={{maxWidth: "80%", minWidth: "60%", marginBottom: "40px", display: "grid", gridTemplateColumns: "1fr 1fr", border: "1px solid lightGray", borderRadius: " 10px"}}>
                         <Box sx={tableCellStyle}>

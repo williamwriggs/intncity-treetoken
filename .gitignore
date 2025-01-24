@@ -39,3 +39,5 @@ next-env.d.ts
 secrets/tree-app-google-service-key.json
 
 package-lock.json
+
+BugList.txt
