@@ -29,11 +29,12 @@ function Copyright() {
   );
 }
 
-const EmailLogin = ({ email, setFlag }) => {
+const EmailLogin = ({ setFlag }) => {
   const auth = useAuth();
   const navigate = useRouter().push;
   const [user, setUser] = useState(null);
   const [connected, setConnected] = useState(null);
+  const [email, setEmail] = useState("");
 
   const EmailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
@@ -69,34 +70,57 @@ const EmailLogin = ({ email, setFlag }) => {
   // }, [connected])
 
   return (
-      <div style={{display: "grid", gridTemplateRows: "1fr 1fr"}}>
+      <form 
+        style={{display: "grid", gridTemplateRows: "1fr 1fr", width: "100%", textAlign: "center" }}
+        onSubmit={(e) => {
+          e.preventDefault()
+          if (EmailRegex.test(email)) {
+            setFlag()
+            auth.Login("emailpasswordless", email)
+          } else {
+            setFlag("Invalid email.")
+          }
+        }}  
+      >
+        <Input 
+          sx={{
+            width: "100%",
+            borderColor: "whitesmoke",
+            borderRadius: "5px",
+            borderWidth: "1px",
+            borderStyle: "solid",
+            padding: "5px",
+            marginTop: "10px",
+            marginBottom: "10px",
+            textAlign: "center"
+          }}
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value)
+          }}
+          placeholder="example@intn.city"
+        />
         <Button
           color="secondary"
-          type="button"
+          type="submit"
           size="large"
           variant="contained"
           sx={{
-            borderRadius: "5px"
-          }}
-          onClick={() => {
-            if (EmailRegex.test(email)) {
-              setFlag()
-              auth.Login("emailpasswordless", email)
-            } else {
-              setFlag("Invalid email.")
-            }
+            borderRadius: "5px",
+            width: "150px",
+            height: "50px",
+            marginLeft: "calc(50% - 75px)"
           }}
         >
           Send Code
         </Button>
-      </div>
+      </form>
   );
 };
 
 export default function LoginPage() {  
   let navigate = useRouter().push;
   const auth = useAuth();
-  const [email, setEmail] = useState("");
   const [flag, setFlag] = useState();
 
 
@@ -165,25 +189,8 @@ export default function LoginPage() {
             }}
           >
             <Typography variant="h6" fontWeight={"bold"}>Enter your email address:</Typography>
-            <Input 
-              sx={{
-                width: "60%",
-                borderColor: "whitesmoke",
-                borderRadius: "5px",
-                borderWidth: "1px",
-                borderStyle: "solid",
-                padding: "5px",
-                margin: "10px",
-                textAlign: "center"
-              }}
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value)
-              }}
-              placeholder="example@intn.city"
-            />
               <Grid item align="right" color="transparent">
-                <EmailLogin email={email} setFlag={setFlag} />
+                <EmailLogin setFlag={setFlag} />
               </Grid>
               {flag && <Typography color="error">{flag}</Typography>}
           </Box>
